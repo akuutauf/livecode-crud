@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container min-h-screen">
+    <div class="container min-h-screen pb-5">
         <div class="mt-3">
             <a href="{{ route('create.product') }}" type="button" class="btn btn-theme">Tambah Produk <i
                     class="fa-solid fa-plus"></i></a>
