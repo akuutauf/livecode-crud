@@ -74,7 +74,7 @@
                             name="description"></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Tambah Data</button>
+                    <button type="submit" class="btn btn-primary">Tambah Produk</button>
                     <a type="button" href="{{ route('index.product') }}" class="btn btn-secondary">Batal</a>
                 </form>
             </div>

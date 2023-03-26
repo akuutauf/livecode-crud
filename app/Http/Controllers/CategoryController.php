@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $payload = [
-            'categories' => Category::all(),
+            'categories' => Category::orderBy('name')->get(),
         ];
 
         return view('pages.category.index', $payload);
@@ -28,7 +28,11 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'action' => route('store.category'),
+        ];
+
+        return view('pages.category.create', $data);
     }
 
     /**
@@ -39,7 +43,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // fungsi validasi
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        // validasi field satu persatu sebelum dilakukan insert
+        Category::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+        ]);
+
+        return redirect()->route('index.category');
     }
 
     /**
@@ -61,7 +77,12 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+            'category'  => Category::find($id),
+            'action' => route('update.category', $id),
+        ];
+
+        return view('pages.category.form', $data);
     }
 
     /**
@@ -73,7 +94,21 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // fungsi validasi
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        // validasi field satu persatu sebelum di update
+
+        // query update
+        Category::where('id', $id)->update([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+        ]);
+
+        return redirect()->route('index.category');
     }
 
     /**
@@ -84,6 +119,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Category::findOrFail($id);
+        $data->delete();
+
+        return redirect()->route('index.category');
     }
 }

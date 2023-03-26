@@ -21,7 +21,7 @@
                 <div class="card-body">
                     <div class="row justify-content-between">
 
-                        <div class="col-6 d-flex">
+                        <div class="col-8 d-flex">
                             <div class="card-text my-auto">
                                 Nama Kategori : <i><b>{{ $item->name }}</b></i><br>
                                 Description : <i>{{ $item->description }}</i><br>

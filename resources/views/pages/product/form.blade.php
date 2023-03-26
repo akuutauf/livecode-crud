@@ -75,7 +75,7 @@
                             name="description">{{ $products->description }}</textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Simpan Data</button>
+                    <button type="submit" class="btn btn-primary">Ubah Produk</button>
                     <a type="button" href="{{ route('index.product') }}" class="btn btn-secondary">Batal</a>
                 </form>
             </div>

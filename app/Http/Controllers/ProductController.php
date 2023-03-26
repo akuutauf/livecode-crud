@@ -17,7 +17,7 @@ class ProductController extends Controller
     {
         $payload = [
             'products' => Product::with('category')->get(),
-            'categories' => Category::select('name')->groupBy('name')->get(),
+            'categories' => Category::select('name')->groupBy('name')->orderBy('name', 'asc')->get(),
         ];
 
         return view('pages.product.index', $payload);
@@ -32,7 +32,7 @@ class ProductController extends Controller
     {
         $data = [
             'action' => route('store.product'),
-            'categories' => Category::all(),
+            'categories' => Category::orderBy('name', 'asc')->get(),
         ];
 
         return view('pages.product.create', $data);
@@ -88,7 +88,7 @@ class ProductController extends Controller
         $data = [
             'products'  => Product::find($id),
             'action' => route('update.product', $id),
-            'categories' => Category::all(),
+            'categories' => Category::orderBy('name', 'asc')->get(),
         ];
 
         return view('pages.product.form', $data);
