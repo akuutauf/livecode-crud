@@ -19,7 +19,8 @@
 
         <div class="card">
             <div class="card-body">
-                <form class="p-3 needs-validation novalidate" method="POST" action="{{ $action }}">
+                <form class="p-3 needs-validation novalidate" method="POST" action="{{ $action }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="card-tite mb-3">
                         <h4><b>Form Insert Data Produk</b></h4>
@@ -36,6 +37,14 @@
                             Nama tidak boleh kosong
                         </div>
                     @endif
+
+                    <div class="mb-3">
+                        <label for="photo" class="form-label">Upload Photo (max: 10Mb)</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="photo" aria-describedby="photo"
+                                aria-label="Upload" name="photo">
+                        </div>
+                    </div>
 
                     <div class="mb-3">
                         <label for="price" class="form-label">Harga Produk</label>

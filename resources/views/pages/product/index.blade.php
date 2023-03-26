@@ -23,21 +23,28 @@
                         <div class="card-body">
                             <div class="row justify-content-between">
 
-                                <div class="col-6">
-                                    <div class="card-title">
-                                        <b>{{ $value->name }}</b>
-                                    </div>
-                                    <div class="card-text">
-                                        Price Product : <i>Rp. {{ $value->price }}</i><br>
-                                        Category Product : <i>{{ $value->category->name }}</i>
-                                    </div>
-                                    <div class="card-text">
-                                        Description Product :
-                                        @if ($value->description == '')
-                                            <i>Belum ditambahkan</i>
-                                        @else
-                                            {{ $value->description }}
-                                        @endif
+                                <div class="col-3 d-flex">
+                                    <img src="{{ Storage::url($value->photo) }}" class="img-thumbnail my-auto"
+                                        alt="">
+                                </div>
+
+                                <div class="col-6 d-flex">
+                                    <div class="my-auto">
+                                        <div class="card-title">
+                                            <b>{{ $value->name }}</b>
+                                        </div>
+                                        <div class="card-text">
+                                            Price Product : <i>Rp. {{ $value->price }}</i><br>
+                                            Category Product : <i>{{ $value->category->name }}</i>
+                                        </div>
+                                        <div class="card-text">
+                                            Description Product :
+                                            @if ($value->description == '')
+                                                <i>Belum ditambahkan</i>
+                                            @else
+                                                {{ $value->description }}
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
 

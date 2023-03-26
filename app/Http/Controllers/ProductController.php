@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -50,14 +52,21 @@ class ProductController extends Controller
         // fungsi validasi
         $validated = $request->validate([
             'name' => 'required',
+            'photo' => 'mimes:jpg,jpeg,png|max:10240',
             'price' => 'required|numeric',
             'description' => 'required',
             'category_id' => 'required|string',
         ]);
 
+        // mengecek apakah field untuk upload foto sudah upload atau belum
+        if ($request->file('photo')) {
+            $saveData['photo'] = Storage::putFile('public/image', $request->file('photo'));
+        }
+
         // validasi field satu persatu sebelum dilakukan insert
         Product::create([
             'name' => $validated['name'],
+            'photo' => $saveData['photo'],
             'price' => $validated['price'],
             'description' => $validated['description'],
             'category_id' => $validated['category_id'],
@@ -103,19 +112,33 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // get data foto product
+        $data = Product::findOrFail($id);
+
         // fungsi validasi
         $validated = $request->validate([
             'name' => 'required',
+            'photo' => 'mimes:jpg,jpeg,png|max:10240',
             'price' => 'required|numeric',
             'description' => 'required',
             'category_id' => 'required|string',
         ]);
 
-        // validasi field satu persatu sebelum di update
+        // mengecek apakah field untuk upload foto sudah upload atau belum
+        if ($request->file('photo')) {
+            // hapus data foto sebelumnya terlbih dahulu
+            Storage::delete($data->photo);
+
+            // simpan foto yang baru
+            $saveData['photo'] = Storage::putFile('public/image', $request->file('photo'));
+        } else {
+            $saveData['photo'] = $data->photo;
+        }
 
         // query update
         Product::where('id', $id)->update([
             'name' => $validated['name'],
+            'photo' => $saveData['photo'],
             'price' => $validated['price'],
             'description' => $validated['description'],
             'category_id' => $validated['category_id'],
@@ -134,6 +157,11 @@ class ProductController extends Controller
     {
         // dd($id);
         $data = Product::findOrFail($id);
+
+        // hapus data foto
+        Storage::delete($data->photo);
+
+        // hapus data
         $data->delete();
 
         return redirect()->route('index.product');
