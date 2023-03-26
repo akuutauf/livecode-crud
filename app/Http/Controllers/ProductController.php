@@ -20,7 +20,7 @@ class ProductController extends Controller
             'categories' => Category::select('name')->groupBy('name')->get(),
         ];
 
-        return view('pages.index', $payload);
+        return view('pages.product.index', $payload);
     }
 
     /**
@@ -35,7 +35,7 @@ class ProductController extends Controller
             'categories' => Category::all(),
         ];
 
-        return view('pages.create', $data);
+        return view('pages.product.create', $data);
     }
 
     /**
@@ -91,7 +91,7 @@ class ProductController extends Controller
             'categories' => Category::all(),
         ];
 
-        return view('pages.form', $data);
+        return view('pages.product.form', $data);
     }
 
     /**

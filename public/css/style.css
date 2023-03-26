@@ -43,3 +43,7 @@ body {
     background-color: #9772fb;
     color: white;
 }
+
+.navbar-theme {
+    background-color: #EFF5F5 !important;
+}
