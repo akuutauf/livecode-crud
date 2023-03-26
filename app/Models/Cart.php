@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Category extends Model
+class Cart extends Model
 {
     use HasFactory;
 
@@ -28,11 +28,12 @@ class Category extends Model
     }
 
     protected $fillable = [
-        'name',
-        'description',
+        'product_id',
+        'quantity',
+        'total_price',
     ];
 
-    public function product()
+    public function products()
     {
         return $this->hasMany(Product::class);
     }

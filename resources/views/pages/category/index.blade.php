@@ -23,7 +23,8 @@
 
                         <div class="col-6 d-flex">
                             <div class="card-text my-auto">
-                                Nama Kategori : <i>{{ $item->name }}</i><br>
+                                Nama Kategori : <i><b>{{ $item->name }}</b></i><br>
+                                Description : <i>{{ $item->description }}</i><br>
                             </div>
                         </div>
 
